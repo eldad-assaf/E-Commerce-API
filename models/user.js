@@ -33,10 +33,16 @@ const userSchema = new mongoose.Schema({
     }
 });
 
-UserSchema.methods.createJWT = function () {
-   return jwt.sign({ userId: this._id, name: this.name }, process.env.JWT_SECRET, {
-      expiresIn: process.env.JWT_LIFETIME,
-    });
-  };
+/**
+ * Creates a JSON Web Token (JWT) that contains the user's ID and name.
+ *
+ * @returns {string} The JWT.
+ */
+
+// UserSchema.methods.createJWT = function () {
+//    return jwt.sign({ userId: this._id, name: this.name }, process.env.JWT_SECRET, {
+//       expiresIn: process.env.JWT_LIFETIME,
+//     });
+//   };
 
 module.exports = mongoose.model('User', userSchema);
