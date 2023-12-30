@@ -1,6 +1,7 @@
 // Load environment variables from the .env file
 require('dotenv').config();
 
+
 // Handle asynchronous errors in Express
 require('express-async-errors');
 
@@ -11,6 +12,11 @@ const morgan = require('morgan');
 
 // Initialize Express app
 const app = express();
+
+//routers
+const authRouter = require('./routes/auth.js');
+
+
 
 // Middleware for logging requests
 app.use(morgan('tiny'));
@@ -34,6 +40,9 @@ const errorHandlerMiddleware = require('./middleware/error-handler.js');
 app.get('/', (req, res) => {
   res.send('e-commerce API!');
 });
+
+app.use('/api/v1/auth', authRouter);
+
 
 // Use custom middleware for handling 404 errors
 app.use(notFoundMiddleware);
